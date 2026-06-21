@@ -1,0 +1,50 @@
+/* ================================================
+   PLOT TWIST — Reusable Component Styles
+   ================================================ */
+
+/* ── Info Drawer ── */
+.drawer {
+  background: var(--surface2); border: 1px solid var(--border2);
+  border-radius: 10px; padding: 14px; margin-top: 9px;
+  animation: fadeUp .2s ease;
+}
+.drawer-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 9px; }
+.drawer-title { font-family: var(--font-display); font-size: 18px; color: var(--cream); letter-spacing: 1px; }
+.drawer-x {
+  background: var(--surface3); border: 1px solid var(--border); border-radius: 50%;
+  width: 26px; height: 26px; cursor: pointer; color: var(--text3); font-size: 13px;
+  display: flex; align-items: center; justify-content: center;
+}
+.drawer-plot { font-family: var(--font-serif); font-size: 12px; color: var(--text2); line-height: 1.65; margin-bottom: 9px; }
+.drawer-stats { display: flex; gap: 5px; margin-bottom: 9px; }
+.dstat { flex: 1; padding: 7px; background: var(--surface3); border-radius: 6px; text-align: center; border: 1px solid var(--border); }
+.dstat-v { font-family: var(--font-display); font-size: 18px; color: var(--gold); letter-spacing: 1px; }
+.dstat-l { font-size: 9px; color: var(--text3); font-family: var(--font-mono); margin-top: 1px; }
+.drawer-sim-lbl { font-family: var(--font-serif); font-size: 9px; color: var(--text3); letter-spacing: 1px; margin-bottom: 5px; }
+.sim-pills { display: flex; flex-wrap: wrap; gap: 4px; }
+.sim-pill  { font-size: 10px; padding: 3px 8px; border-radius: 4px; background: var(--surface3); color: var(--text2); border: 1px solid var(--border); font-family: var(--font-mono); }
+
+/* ── Toast notification ── */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: var(--surface2); border: 1px solid var(--gold2);
+  color: var(--text); font-family: var(--font-serif); font-size: 12px;
+  padding: 10px 18px; border-radius: 8px; z-index: 9990;
+  box-shadow: 0 4px 20px rgba(0,0,0,.5); white-space: nowrap;
+  animation: fadeUp .3s var(--ease-snap);
+}
+
+/* ── Loading spinner ── */
+.spinner {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 3px solid var(--border2);
+  border-top-color: var(--gold);
+  animation: reelSpin .8s linear infinite;
+  margin: 20px auto;
+}
+
+/* ── App wrap (used by AppShell.js) ── */
+.app-wrap {
+  width: 100%;
+  position: relative;
+}

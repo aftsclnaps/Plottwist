@@ -1,0 +1,320 @@
+/* ================================================
+   PLOT TWIST — Cinema Animation Styles
+   ================================================ */
+
+/* ── Keyframes ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(28px) scale(.95); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes flyR {
+  to { transform: translateX(150%) rotate(22deg); opacity: 0; }
+}
+@keyframes flyL {
+  to { transform: translateX(-150%) rotate(-22deg); opacity: 0; }
+}
+@keyframes flyUp {
+  to { transform: translateY(-130%) scale(1.04); opacity: 0; }
+}
+@keyframes confettiFall {
+  0%   { transform: translateY(-10px) rotate(0);     opacity: 1; }
+  100% { transform: translateY(110vh) rotate(680deg); opacity: 0; }
+}
+@keyframes waveBar {
+  0%,100% { transform: scaleY(.35); }
+  50%     { transform: scaleY(1); }
+}
+@keyframes floatUp {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-5px); }
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes neonFlicker {
+  0%,19%,21%,23%,25%,54%,56%,100% { opacity: 1; }
+  20%,24%,55%                      { opacity: .35; }
+}
+@keyframes projFlicker {
+  0%,100% { opacity: 1; }
+  8%      { opacity: .5; }
+  10%     { opacity: .9; }
+  45%     { opacity: .8; }
+  47%     { opacity: 1; }
+}
+@keyframes slideBarIn {
+  from { width: 0; }
+}
+@keyframes bulbOn {
+  0%   { opacity: 0; transform: scale(.5); }
+  60%  { transform: scale(1.2); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes matchCardReveal {
+  0%   { transform: scale(0) rotate(-6deg); opacity: 0; }
+  60%  { transform: scale(1.04) rotate(1deg); }
+  80%  { transform: scale(.98); }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+@keyframes altSlideIn {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ── Film strip scroll ── */
+@keyframes stripScrollDown {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* ── Countdown zoom ── */
+@keyframes countdownZoom {
+  0%   { transform: translate(-50%,-50%) scale(3); opacity: 0; }
+  25%  { opacity: 1; }
+  70%  { transform: translate(-50%,-50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%,-50%) scale(.6); opacity: 0; }
+}
+
+/* ── Atmosphere ── */
+@keyframes dustFlicker {
+  0%,100% { opacity: 0; }
+  20%,80% { opacity: .06; }
+  50%     { opacity: .12; }
+}
+@keyframes scratches {
+  0%,100% { opacity: 0; }
+  50%     { opacity: .4; }
+}
+@keyframes clapSnap {
+  0%,100% { transform: rotate(0); }
+  15%     { transform: rotate(-32deg); }
+  35%     { transform: rotate(-2deg); }
+  50%     { transform: rotate(-18deg); }
+  70%     { transform: rotate(-1deg); }
+}
+@keyframes curtainOpenL {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+@keyframes curtainOpenR {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+@keyframes spotReveal {
+  0%   { clip-path: ellipse(0% 0% at 50% 50%); opacity: 1; }
+  100% { clip-path: ellipse(100% 100% at 50% 50%); opacity: 1; }
+}
+@keyframes beamAppear {
+  0%   { opacity: 0; transform: translateX(-50%) scaleX(0); }
+  100% { opacity: 1; transform: translateX(-50%) scaleX(1); }
+}
+@keyframes reelSpin  { from { transform: rotate(0); }   to { transform: rotate(360deg); } }
+@keyframes reelSpinR { from { transform: rotate(0); }   to { transform: rotate(-360deg); } }
+
+/* ================================================
+   CINEMA OVERLAY — Full viewport coverage
+   ================================================ */
+#cinemaOverlay {
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 430px; height: 100%;
+  background: #000;
+  z-index: 9000;
+  display: none;
+  overflow: hidden;
+}
+#cinemaOverlay.active { display: block; }
+
+/* Film strips — full height */
+.fs-left, .fs-right {
+  position: absolute;
+  top: 0; bottom: 0; width: 32px;
+  background: #0a0800;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+.fs-left  { left: 0;  border-right: 3px solid #1a1408; }
+.fs-right { right: 0; border-left:  3px solid #1a1408; }
+
+.fs-holes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; padding: 8px 0;
+  animation: stripScrollDown 1s linear infinite;
+}
+.fs-hole {
+  width: 16px; height: 22px;
+  border-radius: 3px;
+  background: #000;
+  border: 1px solid #050500;
+  flex-shrink: 0;
+}
+
+/* Projector beams */
+.proj-beam-full {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left:  160px solid transparent;
+  border-right: 160px solid transparent;
+  border-top: 100vh solid rgba(255,240,160,.06);
+  z-index: 2; pointer-events: none;
+  animation: beamAppear .6s ease forwards;
+}
+.proj-beam-core-full {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left:  50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 50vh solid rgba(255,240,160,.1);
+  z-index: 3; pointer-events: none;
+}
+
+/* Dust & scratches */
+.dust-overlay {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
+  background-image:
+    radial-gradient(circle, rgba(255,240,160,.8) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,240,160,.6) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,.5)  1px, transparent 1px);
+  background-size: 80px 80px, 120px 100px, 60px 70px;
+  background-position: 10px 20px, 50px 40px, 30px 10px;
+  animation: dustFlicker 2s ease infinite;
+}
+.scratch {
+  position: absolute; top: 0; bottom: 0; width: 1px;
+  background: rgba(255,255,255,.6);
+  z-index: 5; pointer-events: none;
+  animation: scratches 1.8s ease infinite;
+}
+.scratch:nth-child(1) { left: 22%; animation-delay: .3s; }
+.scratch:nth-child(2) { left: 61%; animation-delay: .9s;  opacity: .4; }
+.scratch:nth-child(3) { left: 78%; animation-delay: 1.4s; width: 2px; opacity: .3; }
+
+/* Frame corners */
+.frame-corner { position: absolute; width: 30px; height: 30px; z-index: 6; }
+.fc-tl { top: 44px; left: 36px;  border-top:    2px solid rgba(245,200,66,.5); border-left:   2px solid rgba(245,200,66,.5); }
+.fc-tr { top: 44px; right: 36px; border-top:    2px solid rgba(245,200,66,.5); border-right:  2px solid rgba(245,200,66,.5); }
+.fc-bl { bottom: 44px; left: 36px;  border-bottom: 2px solid rgba(245,200,66,.5); border-left:   2px solid rgba(245,200,66,.5); }
+.fc-br { bottom: 44px; right: 36px; border-bottom: 2px solid rgba(245,200,66,.5); border-right:  2px solid rgba(245,200,66,.5); }
+
+/* Crosshair */
+.crosshair { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 6; opacity: .3; }
+.ch-h { width: 60px; height: 1px; background: rgba(245,200,66,.8); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.ch-v { width: 1px; height: 60px; background: rgba(245,200,66,.8); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.ch-c { width: 20px; height: 20px; border-radius: 50%; border: 1px solid rgba(245,200,66,.8); position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+/* Countdown */
+.cnum {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  font-family: var(--font-display);
+  font-size: clamp(100px, 52vw, 220px);
+  color: #f5e6c0; line-height: 1;
+  z-index: 20; display: none;
+  text-shadow: 0 0 60px rgba(245,200,66,.3), 0 0 120px rgba(245,200,66,.1);
+  animation: countdownZoom .95s var(--ease-snap) forwards;
+}
+
+/* Clapper board */
+.clapper-full {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 25; display: none;
+  filter: drop-shadow(0 12px 40px rgba(0,0,0,.9));
+}
+.clapper-board-full {
+  width: clamp(200px, 70vw, 260px);
+  background: #080600;
+  border: 2px solid #3a3010;
+  border-radius: 6px; overflow: hidden;
+}
+.clapper-stripe {
+  height: 44px;
+  background: repeating-linear-gradient(45deg, #f5c842 0, #f5c842 10px, #080600 10px, #080600 20px);
+  border-bottom: 2px solid #3a3010;
+  transform-origin: top center;
+  animation: clapSnap .6s .1s cubic-bezier(.36,.07,.19,.97) forwards;
+}
+.clapper-info { padding: 14px 16px 12px; }
+.ci-row {
+  display: flex; justify-content: space-between;
+  font-family: var(--font-serif); font-size: 11px;
+  color: var(--text2);
+  border-bottom: 1px solid #2a2010;
+  padding: 4px 0; margin-bottom: 4px;
+}
+.ci-title {
+  font-family: var(--font-display); font-size: 22px;
+  color: var(--gold); letter-spacing: 2px;
+  margin-top: 6px; text-align: center;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+/* Reel row */
+.reel-row {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: clamp(30px, 10vw, 48px);
+  align-items: center; z-index: 15;
+}
+.reel-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.reel {
+  width: clamp(48px, 14vw, 56px); height: clamp(48px, 14vw, 56px);
+  border-radius: 50%; border: 3px solid #3a3010;
+  background: #0a0800;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.reel-inner {
+  width: 60%; height: 60%; border-radius: 50%;
+  border: 2px solid #2a2010; position: relative;
+  animation: reelSpin 1.2s linear infinite;
+}
+.reel:nth-child(odd) .reel-inner { animation: reelSpinR 1.2s linear infinite; }
+.reel-spoke { position: absolute; width: 100%; height: 1px; background: #2a2010; top: 50%; }
+.reel-spoke:nth-child(2) { transform: rotate(60deg); }
+.reel-spoke:nth-child(3) { transform: rotate(120deg); }
+.reel-hole { width: 8px; height: 8px; border-radius: 50%; background: #050500; border: 1px solid #1a1408; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+.reel-lbl { font-family: var(--font-display); font-size: 10px; color: var(--text3); letter-spacing: 2px; }
+
+/* Curtains */
+.curtain-l, .curtain-r {
+  position: absolute; top: 0; bottom: 0; width: 50%; z-index: 30;
+  background: repeating-linear-gradient(90deg, #120606 0, #1e0c0c 12px, #120606 24px);
+  box-shadow: inset -4px 0 20px rgba(0,0,0,.5);
+}
+.curtain-l { left: 0;  transform-origin: left center; }
+.curtain-r { right: 0; transform-origin: right center; }
+.curtain-fringe { position: absolute; top: 0; bottom: 0; width: 8px; background: repeating-linear-gradient(180deg, #f5c842 0, #f5c842 8px, transparent 8px, transparent 14px); opacity: .3; }
+.curtain-l .curtain-fringe { right: 0; }
+.curtain-r .curtain-fringe { left: 0; }
+.curtain-l.open { animation: curtainOpenL .9s .1s cubic-bezier(.4,0,.2,1) forwards; }
+.curtain-r.open { animation: curtainOpenR .9s .1s cubic-bezier(.4,0,.2,1) forwards; }
+
+/* Spotlight */
+.spotlight-full {
+  position: absolute; inset: 0; z-index: 28;
+  background: #000; pointer-events: none;
+  clip-path: ellipse(0% 0% at 50% 50%);
+}
+.spotlight-full.reveal { animation: spotReveal .7s .15s var(--ease-snap) forwards; }
+
+/* Confetti layer */
+.clayer {
+  position: fixed; top: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 430px; height: 100%;
+  pointer-events: none; z-index: 9999; overflow: hidden;
+}
+.cpce { position: absolute; top: -15px; animation: confettiFall ease forwards; }

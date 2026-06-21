@@ -1,0 +1,104 @@
+/* ================================================
+   PLOT TWIST — Global Styles & CSS Variables
+   ================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Special+Elite&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  /* Core palette */
+  --bg:           #0a0800;
+  --bg2:          #110f06;
+  --bg3:          #1a1608;
+  --surface:      #16130a;
+  --surface2:     #1e1a0e;
+  --surface3:     #26210f;
+  --border:       #2e2910;
+  --border2:      #3d3618;
+
+  /* Text */
+  --text:         #f5e6c0;
+  --text2:        #c4aa70;
+  --text3:        #7a6a40;
+
+  /* Accent: Gold */
+  --gold:         #f5c842;
+  --gold2:        #e8a820;
+  --gold-dim:     #3a2c08;
+
+  /* Accent: Red */
+  --red:          #c8322a;
+  --red2:         #e84438;
+  --red-dim:      #3a0c0a;
+
+  /* Accent: Sage */
+  --sage:         #90d4a0;
+  --sage-dim:     #0a2a14;
+
+  /* Accent: Lavender */
+  --lav:          #c8a8f0;
+  --lav-dim:      #2a1a40;
+
+  /* Cream */
+  --cream:        #fdf3d0;
+  --cream2:       #f0e0a0;
+
+  /* Typography */
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-serif:   'Special Elite', serif;
+  --font-mono:    'DM Mono', monospace;
+  --font-sans:    'DM Sans', sans-serif;
+
+  /* Transitions */
+  --ease-snap:    cubic-bezier(.22, 1, .36, 1);
+  --ease-bounce:  cubic-bezier(.34, 1.56, .64, 1);
+  --ease-in:      cubic-bezier(.55, .055, .675, .19);
+}
+
+/* Reset */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow-x: hidden; }
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  -webkit-tap-highlight-color: transparent;
+}
+button { cursor: pointer; font-family: inherit; }
+input, textarea { font-family: inherit; }
+*:focus { outline: none; }
+img { display: block; max-width: 100%; }
+
+/* App wrapper */
+#root {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Scanlines overlay */
+.scanlines {
+  position: fixed;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; max-width: 430px; height: 100%;
+  pointer-events: none;
+  z-index: 50;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent, transparent 2px,
+    rgba(0,0,0,.07) 2px, rgba(0,0,0,.07) 4px
+  );
+}
+
+/* Screen transitions */
+.screen { display: none; }
+.screen.active { display: block; animation: fadeUp .4s var(--ease-snap); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 2px; }
